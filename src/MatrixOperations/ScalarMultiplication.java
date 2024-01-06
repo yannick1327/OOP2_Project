@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-class ScalarMultiplication<T extends Number> extends MatrixOperation<T> {
+public class ScalarMultiplication<T extends Number> extends MatrixOperation<T> {
 
     public ScalarMultiplication(T[][] matrix, T scalar) {
         super(matrix, scalar);

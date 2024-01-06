@@ -8,5 +8,3 @@ public enum TasktypeMatrixoperations
     ScalarMultiplication, // eine Zahl und eine Matrix ergeben eine Matrix
     Invalid
 }
-
-

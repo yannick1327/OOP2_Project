@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-class VectorAdditionAndSubtraction<T extends Number> extends VectorOperation<T> {
+public class VectorAdditionAndSubtraction<T extends Number> extends VectorOperation<T> {
 
     boolean isAddition;
     

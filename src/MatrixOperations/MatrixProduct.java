@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-class MatrixProduct<T extends Number> extends MatrixOperation<T> {
+public class MatrixProduct<T extends Number> extends MatrixOperation<T> {
 
     public MatrixProduct(T[][] matrixA, T[][] matrixB) {
         super(matrixA, matrixB);

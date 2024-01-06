@@ -26,12 +26,7 @@ abstract class MatrixOperation<T extends Number> {
 
     public abstract void performOperation();
 
-    public void printResult() {
-        for (T[] row : result) {
-            for (T val : row) {
-                System.out.print(val + " ");
-            }
-            System.out.println();
-        }
+    public T[][] returnResult() {
+       return result;
     }
 }

@@ -20,10 +20,7 @@ abstract class VectorOperation<T extends Number> {
 
     public abstract void performOperation();
 
-    public void printResult() {
-        for (T val : result) {
-            System.out.print(val + " ");
-        }
-        System.out.println();
+    public T[] returnResult() {
+        return result;
     }
 }

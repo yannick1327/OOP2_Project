@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 // sehr wahrscheinlich bullshit und genau das gleiche wie die Klasse ScalarMultiplication
 //
 
-class ScalarProduct<T extends Number> extends MatrixOperation<T> {
+public class ScalarProduct<T extends Number> extends MatrixOperation<T> {
 
     public ScalarProduct(T[][] matrix, T scalar) {
         super(matrix, scalar);

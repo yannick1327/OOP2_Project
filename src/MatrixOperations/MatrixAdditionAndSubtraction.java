@@ -4,7 +4,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-class MatrixAdditionAndSubtraction<T extends Number> extends MatrixOperation<T> {
+public class MatrixAdditionAndSubtraction<T extends Number> extends MatrixOperation<T> {
 
     private boolean isAddition;
 

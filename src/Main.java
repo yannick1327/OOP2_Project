@@ -4,8 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 
 public class Main {
 
@@ -18,7 +17,14 @@ public class Main {
 //                {6, 5, 4},
 //                {3, 2, 1}};
 
-        // System.out.println("Öffnen Sie die \"Matrix.csv\" oder \"Vektor.csv\" und geben Sie dort die gewünschten Matrizen / Vektoren ein.");
+        // Anzahl der Threads (kann angepasst werden)
+        // Gibt zurück wie viele Threads der Runtime zur Verfügung stehen (normalerweise so viele wie viele Threads die CPU hat bei mir 16)
+        // int numThreads = Runtime.getRuntime().availableProcessors();
+        // ExecutorService executor = Executors.newFixedThreadPool(numThreads);
+
+        //System.out.println("Bitte geben sie eine Zahl ein die mit dem Vektor / der Matrix verrechnet werden soll.");
+        // System.out.println("Öffnen Sie die \"Vektor.csv\" und geben Sie dort den gewünschten Vektor ein.");
+        //System.out.println("Öffnen Sie die \"Matrix.csv\" und geben Sie dort die gewünschte Matrix ein.");
 
 
         printMatrix(CSVReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/Matrix.csv", 0));
@@ -36,32 +42,27 @@ public class Main {
 
             if (input.equalsIgnoreCase("M"))
             {
-                validInput = true;
                 TasktypeMatrixoperations selectedTask = SelectMatrixoperation();
+                if (selectedTask != TasktypeMatrixoperations.Invalid){
+                    validInput = true;
+                    RunSelectedTask(selectedTask);
+                    break;
+                }
+
             } else if (input.equalsIgnoreCase("V"))
             {
-                validInput = true;
                 TasktypeVectoroperations selectedTask = SelectVectoroperation();
+                if (selectedTask != TasktypeVectoroperations.Invalid){
+                    validInput = true;
+                    RunSelectedTask(selectedTask);
+                    break;
+                }
             } else
             {
                 System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
             }
+            scanner.close();
         }
-
-
-
-        // CSVReader.readMatricesFromCSV();
-
-        // Anzahl der Threads (kann angepasst werden)
-        // Gibt zurück wie viele Threads der Runtime zur Verfügung stehen (normalerweise so viele wie viele Threads die CPU hat bei mir 16)
-        int numThreads = Runtime.getRuntime().availableProcessors();
-        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
-
-        // Ergebnis ausgeben
-//        printMatrix(result);
-//
-//        // Ergebnis in eine Textdatei schreiben
-//        writeMatrixToFile(convertIntArrayToDoubleArray(result), "result.txt");
     }
 
     private static TasktypeMatrixoperations SelectMatrixoperation()
@@ -78,22 +79,25 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
+        TasktypeMatrixoperations returnValue ;
         switch (Integer.parseInt(input))
         {
             case (1):
-                return TasktypeMatrixoperations.MatrixAddition;
+                returnValue = TasktypeMatrixoperations.MatrixAddition;
             case (2):
-              return TasktypeMatrixoperations.MatrixSubtraction;
+                returnValue = TasktypeMatrixoperations.MatrixSubtraction;
             case (3):
-               return TasktypeMatrixoperations.MatrixProduct;
+                returnValue = TasktypeMatrixoperations.MatrixProduct;
             case (4):
-                return TasktypeMatrixoperations.MatrixVectorProduct;
+                returnValue = TasktypeMatrixoperations.MatrixVectorProduct;
             case (5):
-                return TasktypeMatrixoperations.ScalarMultiplication;
+                returnValue = TasktypeMatrixoperations.ScalarMultiplication;
             default :
                 System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
-               return TasktypeMatrixoperations.Invalid;
+                returnValue = TasktypeMatrixoperations.Invalid;
         }
+        scanner.close();
+        return returnValue;
     }
 
     private static TasktypeVectoroperations SelectVectoroperation()
@@ -110,22 +114,102 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
+        TasktypeVectoroperations returnValue;
         switch (Integer.parseInt(input))
         {
             case (1):
-                return TasktypeVectoroperations.VectorAddidtion;
+                returnValue = TasktypeVectoroperations.VectorAddidtion;
             case (2):
-                return TasktypeVectoroperations.VectorSubstraction;
+                returnValue = TasktypeVectoroperations.VectorSubstraction;
             case (3):
-                return TasktypeVectoroperations.VectorProduct;
+                returnValue = TasktypeVectoroperations.VectorProduct;
             case (4):
-                return TasktypeVectoroperations.ScalarMultiplication;
+                returnValue = TasktypeVectoroperations.ScalarMultiplication;
             case (5):
-                return TasktypeVectoroperations.ScalarProduct;
+                returnValue = TasktypeVectoroperations.ScalarProduct;
             default :
                 System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
-               return TasktypeVectoroperations.Invalid;
+                returnValue = TasktypeVectoroperations.Invalid;
         }
+        scanner.close();
+        return returnValue;
+    }
+
+    private static void RunSelectedTask(TasktypeVectoroperations selectedTask)
+    {
+        if (selectedTask == TasktypeVectoroperations.Invalid) {
+            return;
+        }
+
+        switch (selectedTask){
+            case VectorAddidtion :
+                //TODO eingabe in die CVS fordern
+
+                //VectorAdditionAndSubtraction calculationClass = new VectorAdditionAndSubtraction<>(,,true);
+                break;
+            case VectorSubstraction:
+                //TODO eingabe in die CVS fordern
+
+                //VectorAdditionAndSubtraction calculationClass = new VectorAdditionAndSubtraction<>(,,false);
+                break;
+            case VectorProduct:
+                //TODO eingabe in die CVS fordern
+
+                //VectorProduct calculationClass = new VectorProduct();
+                break;
+            case ScalarMultiplication:
+                //TODO eingabe in die CVS fordern
+
+                //ScalarMultiplication calculationClass = new ScalarMultiplication<>();
+                break;
+            case ScalarProduct:
+                //TODO eingabe in die CVS fordern
+
+                //VectorScalarMultiplication calculationClass = new VectorScalarMultiplication<>();
+                break;
+        }
+
+        //calculationClass.performOperation();
+        //calculationClass.returnResult();
+    }
+
+    private static void RunSelectedTask(TasktypeMatrixoperations selectedTask)
+    {
+        if (selectedTask == TasktypeMatrixoperations.Invalid) {
+            return;
+        }
+
+        switch (selectedTask){
+            case MatrixAddition:
+                //TODO eingabe in die CVS fordern
+
+
+                //MatrixAdditionAndSubtraction calculationClass  = new MatrixAdditionAndSubtraction<>();
+                break;
+            case MatrixSubtraction:
+                //TODO eingabe in die CVS fordern
+
+                //MatrixAdditionAndSubtraction calculationClass  = new MatrixAdditionAndSubtraction<>();
+                break;
+            case MatrixProduct:
+                //TODO eingabe in die CVS fordern
+
+                //MatrixProduct calculationClass = new MatrixProduct();
+                break;
+            case MatrixVectorProduct:
+                //TODO eingabe in die CVS fordern
+
+                // 2ter vektor ist einfach nur eindimesional deshalb der selbe aufruf
+                //MatrixProduct calculationClass = new MatrixProduct();
+                break;
+            case ScalarMultiplication:
+                //TODO eingabe in die CVS fordern
+
+                //ScalarMultiplication calculationClass = new ScalarMultiplication<>();
+                break;
+        }
+        //calculationClass.performOperation();
+        //calculationClass.returnResult();
     }
 
     private static void printMatrix(double[][] matrix) {
