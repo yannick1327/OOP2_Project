@@ -171,6 +171,15 @@ public class Main {
 
         //calculationClass.performOperation();
         //calculationClass.returnResult();
+        //TODO das result in der Console ausgeben
+
+        System.out.println("Geben sie \"J\" ein das Ergebnis auch in die CSV Datei geschrieben werden soll.");
+        System.out.println("Nach der Eingabe wird das Programm beendet.");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if(input.equalsIgnoreCase("J")){
+            // writeResultToFile();
+        }
     }
 
     private static void RunSelectedTask(TasktypeMatrixoperations selectedTask)
@@ -210,6 +219,15 @@ public class Main {
         }
         //calculationClass.performOperation();
         //calculationClass.returnResult();
+        //TODO das result in der Console ausgeben
+
+        System.out.println("Geben sie \"J\" ein das Ergebnis auch in die CSV Datei geschrieben werden soll.");
+        System.out.println("Nach der Eingabe wird das Programm beendet.");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if(input.equalsIgnoreCase("J")){
+            // writeResultToFile();
+        }
     }
 
     private static void printMatrix(double[][] matrix) {
