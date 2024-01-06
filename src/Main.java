@@ -1,9 +1,10 @@
-
-import java.io.*;
+import Enums.TasktypeMatrixoperations;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -22,13 +23,24 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        if (input.equalsIgnoreCase("M")) {
-            System.out.println("Welche Matrixoperation möchten Sie ausführen? Auswahlmöglichkeiten:");
-        } else if (input.equalsIgnoreCase("V")) {
+        boolean vaildInput = false;
 
-        } else {
-            System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
+        while (!vaildInput)
+        {
+            if (input.equalsIgnoreCase("M"))
+            {
+                vaildInput = true;
+                SelectMatrixoperation();
+            } else if (input.equalsIgnoreCase("V"))
+            {
+                vaildInput = true;
+                SelectVectoroperation();
+            } else
+            {
+                System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
+            }
         }
+
 
 
         // CSVReader.readMatricesFromCSV();
@@ -43,6 +55,16 @@ public class Main {
 //
 //        // Ergebnis in eine Textdatei schreiben
 //        writeMatrixToFile(convertIntArrayToDoubleArray(result), "result.txt");
+    }
+
+    private static void SelectMatrixoperation()
+    {
+        System.out.println("Welche Matrixoperation möchten Sie ausführen?");
+        System.out.println("Auswahlmöglichkeiten:");
+    }
+    private static void SelectVectoroperation()
+    {
+        System.out.println("Welche Vektoroperation möchten Sie ausführen? Auswahlmöglichkeiten:");
     }
 
     private static void printMatrix(int[][] matrix) {
