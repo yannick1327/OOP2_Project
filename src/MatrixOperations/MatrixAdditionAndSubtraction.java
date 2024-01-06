@@ -35,10 +35,10 @@ class MatrixAdditionAndSubtraction<T extends Number> extends MatrixOperation<T> 
     }
 
     private T addMatricesAtIndex(int row, int col) {
-        return (T) new Double(matrixA[row][col].doubleValue() + matrixB[row][col].doubleValue());
+        return (T) Double.valueOf(matrixA[row][col].doubleValue() + matrixB[row][col].doubleValue());
     }
 
     private T subtractMatricesAtIndex(int row, int col) {
-        return (T) new Double(matrixA[row][col].doubleValue() - matrixB[row][col].doubleValue());
+        return (T) Double.valueOf(matrixA[row][col].doubleValue() - matrixB[row][col].doubleValue());
     }
 }

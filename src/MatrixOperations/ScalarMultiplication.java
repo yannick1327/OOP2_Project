@@ -32,6 +32,6 @@ class ScalarMultiplication<T extends Number> extends MatrixOperation<T> {
     }
 
     private T multiplyMatrixElementByScalar(int row, int col) {
-        return (T) new Double(matrixA[row][col].doubleValue() * scalar.doubleValue());
+        return (T) Double.valueOf(matrixA[row][col].doubleValue() * scalar.doubleValue());
     }
 }

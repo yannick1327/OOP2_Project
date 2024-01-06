@@ -28,6 +28,6 @@ class VectorMultiplication<T extends Number> extends VectorOperation<T> {
     }
 
     private T multiplyVectorsAtIndex(int index) {
-        return (T) new Double(vectorA[index].doubleValue() * vectorB[index].doubleValue());
+        return (T) Double.valueOf(vectorA[index].doubleValue() * vectorB[index].doubleValue());
     }
 }

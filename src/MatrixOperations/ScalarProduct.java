@@ -36,6 +36,6 @@ class ScalarProduct<T extends Number> extends MatrixOperation<T> {
     }
 
     private T scalarProductAtIndex(int row, int col) {
-        return (T) new Double(matrix[row][col].doubleValue() * scalar.doubleValue());
+        return (T) Double.valueOf(matrixA[row][col].doubleValue() * scalar.doubleValue());
     }
 }

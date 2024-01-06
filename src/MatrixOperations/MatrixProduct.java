@@ -36,6 +36,6 @@ class MatrixProduct<T extends Number> extends MatrixOperation<T> {
         for (int k = 0; k < matrixA[0].length; k++) {
             sum += matrixA[row][k].doubleValue() * matrixB[k][col].doubleValue();
         }
-        return (T) new Double(sum);
+        return (T) Double.valueOf(sum);
     }
 }

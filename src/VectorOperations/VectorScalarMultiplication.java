@@ -31,6 +31,6 @@ public class VectorScalarMultiplication<T extends Number> extends VectorOperatio
     }
 
     private T multiplyVectorAtIndex(int index) {
-        return (T) new Double(vectorA[index].doubleValue() * scalar.doubleValue());
+        return (T) Double.valueOf(vectorA[index].doubleValue() * scalar.doubleValue());
     }
 }
