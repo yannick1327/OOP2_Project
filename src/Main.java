@@ -1,9 +1,11 @@
-
-import java.io.*;
+import Enums.TasktypeMatrixoperations;
+import Enums.TasktypeVectoroperations;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -16,19 +18,31 @@ public class Main {
 //                {6, 5, 4},
 //                {3, 2, 1}};
 
-        System.out.println("Öffnen Sie die \"Matrix.csv\" oder \"Vektor.csv\" und geben Sie dort die gewünschten Matrizen / Vektoren ein.");
-        System.out.println("Nachdem Sie das getan haben, geben Sie \"M\" ein wenn Sie eine Matrixberechnung ausführen wollen bzw. \"V\" für die Berechnung einer Vektoroperation ein:");
+        // System.out.println("Öffnen Sie die \"Matrix.csv\" oder \"Vektor.csv\" und geben Sie dort die gewünschten Matrizen / Vektoren ein.");
 
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
+        boolean validInput = false;
 
-        if (input.equalsIgnoreCase("M")) {
-            System.out.println("Welche Matrixoperation möchten Sie ausführen? Auswahlmöglichkeiten:");
-        } else if (input.equalsIgnoreCase("V")) {
+        while (!validInput)
+        {
+            System.out.println("Bitte geben Sie \"M\" ein wenn Sie eine Matrixberechnung ausführen wollen \nbzw. \"V\" für die Berechnung einer Vektoroperation ein:");
 
-        } else {
-            System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+
+            if (input.equalsIgnoreCase("M"))
+            {
+                validInput = true;
+                TasktypeMatrixoperations selectedTask = SelectMatrixoperation();
+            } else if (input.equalsIgnoreCase("V"))
+            {
+                validInput = true;
+                TasktypeVectoroperations selectedTask = SelectVectoroperation();
+            } else
+            {
+                System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
+            }
         }
+
 
 
         // CSVReader.readMatricesFromCSV();
@@ -43,6 +57,70 @@ public class Main {
 //
 //        // Ergebnis in eine Textdatei schreiben
 //        writeMatrixToFile(convertIntArrayToDoubleArray(result), "result.txt");
+    }
+
+    private static TasktypeMatrixoperations SelectMatrixoperation()
+    {
+        System.out.println("Geben die die Zahl der Operation ein die sie ausführen möchten.");
+        System.out.println("Auswahlmöglichkeiten:");
+        int enumerator = 1;
+        for (TasktypeMatrixoperations tasktype : TasktypeMatrixoperations.values())
+        {
+            System.out.println(enumerator + ":" + tasktype);
+            enumerator++;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        switch (Integer.parseInt(input))
+        {
+            case (1):
+                return TasktypeMatrixoperations.MatrixAddition;
+            case (2):
+              return TasktypeMatrixoperations.MatrixSubtraction;
+            case (3):
+               return TasktypeMatrixoperations.MatrixProduct;
+            case (4):
+                return TasktypeMatrixoperations.MatrixVectorProduct;
+            case (5):
+                return TasktypeMatrixoperations.ScalarMultiplication;
+            default :
+                System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
+               return TasktypeMatrixoperations.Invalid;
+        }
+    }
+
+    private static TasktypeVectoroperations SelectVectoroperation()
+    {
+        System.out.println("Geben die die Zahl der Operation ein die sie ausführen möchten.");
+        System.out.println("Auswahlmöglichkeiten:");
+        int enumerator = 1;
+        for (TasktypeVectoroperations tasktype : TasktypeVectoroperations.values())
+        {
+            System.out.println(enumerator + ":" + tasktype);
+            enumerator++;
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        switch (Integer.parseInt(input))
+        {
+            case (1):
+                return TasktypeVectoroperations.VectorAddidtion;
+            case (2):
+                return TasktypeVectoroperations.VectorSubstraction;
+            case (3):
+                return TasktypeVectoroperations.VectorProduct;
+            case (4):
+                return TasktypeVectoroperations.ScalarMultiplication;
+            case (5):
+                return TasktypeVectoroperations.ScalarProduct;
+            default :
+                System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
+               return TasktypeVectoroperations.Invalid;
+        }
     }
 
     private static void printMatrix(int[][] matrix) {
