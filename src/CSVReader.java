@@ -7,66 +7,59 @@ import java.util.List;
 
 public class CSVReader {
 
-    public static List<double[][]> readMatricesFromCSV(String fileName, int rows, int cols) {
-        List<double[][]> matrices = new ArrayList<>();
+    public static double[][] readMatrixFromCSV(String fileName, int matrixIndex) {
+        List<List<Double>> matrixData = readDataFromCSV(fileName, matrixIndex);
+
+        // Convert List<List<Double>> to double[][]
+        int rows = matrixData.size();
+        int cols = matrixData.get(0).size();
+        double[][] matrix = new double[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix[i][j] = matrixData.get(i).get(j);
+            }
+        }
+
+        return matrix;
+    }
+
+    public static double[] readVectorFromCSV(String fileName, int vectorIndex) {
+        List<List<Double>> vectorData = readDataFromCSV(fileName, vectorIndex);
+
+        // Convert List<List<Double>> to double[]
+        int length = vectorData.get(0).size();
+        double[] vector = new double[length];
+        for (int i = 0; i < length; i++) {
+            vector[i] = vectorData.get(0).get(i);
+        }
+
+        return vector;
+    }
+
+    private static List<List<Double>> readDataFromCSV(String fileName, int dataIndex) {
+        List<List<Double>> data = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
-            while ((line = reader.readLine()) != null) {
-                String[] matrixStrings = line.split(";");
-                double[][] matrix = new double[rows][cols * matrixStrings.length];
+            int currentIndex = 0;
 
-                for (int i = 0; i < matrixStrings.length; i++) {
-                    String[] values = matrixStrings[i].split(",");
-                    for (int rowIndex = 0; rowIndex < rows; rowIndex++) {
-                        for (int colIndex = 0; colIndex < cols; colIndex++) {
-                            matrix[rowIndex][i * cols + colIndex] = Double.parseDouble(values[colIndex]);
-                        }
+            while ((line = reader.readLine()) != null) {
+                if (currentIndex == dataIndex) {
+                    String[] values = line.split(",");
+                    List<Double> dataList = new ArrayList<>();
+                    for (String value : values) {
+                        dataList.add(Double.parseDouble(value));
                     }
+                    data.add(dataList);
+                    break;  // Stop after reading the desired data
                 }
-                matrices.add(matrix);
+
+                currentIndex++;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return matrices;
-    }
-
-    public static void printMatrices(List<double[][]> matrices) {
-        for (double[][] matrix : matrices) {
-            System.out.println("Matrix:");
-            for (double[] row : matrix) {
-                System.out.println(Arrays.toString(row));
-            }
-            System.out.println();
-        }
-    }
-
-    public static List<double[]> readVectorsFromCSV(String fileName) {
-        List<double[]> vectors = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] values = line.split(";");
-                double[] vector = new double[values.length];
-
-                for (int i = 0; i < values.length; i++) {
-                    vector[i] = Double.parseDouble(values[i]);
-                }
-                vectors.add(vector);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return vectors;
-    }
-
-    public static void printVectors(List<double[]> vectors) {
-        for (double[] vector : vectors) {
-            System.out.println("Vector: " + Arrays.toString(vector));
-        }
+        return data;
     }
 }
