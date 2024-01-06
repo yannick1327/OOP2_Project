@@ -4,10 +4,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class VectorScalarMultiplication<T extends Number> extends VectorOperation<T> {
+public class VectorProduct<T extends Number> extends VectorOperation<T> {
 
-    public VectorScalarMultiplication(T[] vector, T scalar) {
-        super(vector, scalar);
+    public VectorProduct(T[] vectorA, T[] vectorB) {
+        super(vectorA, vectorB);
     }
 
     @Override
@@ -16,7 +16,7 @@ public class VectorScalarMultiplication<T extends Number> extends VectorOperatio
 
         for (int i = 0; i < vectorA.length; i++) {
             final int index = i;
-            executor.execute(() -> result[index] = multiplyVectorAtIndex(index));
+            executor.execute(() -> result[index] = multiplyVectorsAtIndex(index));
         }
 
         executor.shutdown();
@@ -27,7 +27,7 @@ public class VectorScalarMultiplication<T extends Number> extends VectorOperatio
         }
     }
 
-    private T multiplyVectorAtIndex(int index) {
-        return (T) Double.valueOf(vectorA[index].doubleValue() * scalar.doubleValue());
+    private T multiplyVectorsAtIndex(int index) {
+        return (T) Double.valueOf(vectorA[index].doubleValue() * vectorB[index].doubleValue());
     }
 }
