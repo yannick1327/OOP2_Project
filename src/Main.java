@@ -1,5 +1,6 @@
 
 import java.io.*;
+import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -16,7 +17,21 @@ public class Main {
 //                {3, 2, 1}};
 
         System.out.println("Öffnen Sie die \"Matrix.csv\" oder \"Vektor.csv\" und geben Sie dort die gewünschten Matrizen / Vektoren ein.");
+        System.out.println("Nachdem Sie das getan haben, geben Sie \"M\" ein wenn Sie eine Matrixberechnung ausführen wollen bzw. \"V\" für die Berechnung einer Vektoroperation ein:");
 
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+        if (input.equalsIgnoreCase("M")) {
+            System.out.println("Welche Matrixoperation möchten Sie ausführen? Auswahlmöglichkeiten:");
+        } else if (input.equalsIgnoreCase("V")) {
+
+        } else {
+            System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
+        }
+
+
+        // CSVReader.readMatricesFromCSV();
 
         // Anzahl der Threads (kann angepasst werden)
         // Gibt zurück wie viele Threads der Runtime zur Verfügung stehen (normalerweise so viele wie viele Threads die CPU hat bei mir 16)
@@ -28,37 +43,6 @@ public class Main {
 //
 //        // Ergebnis in eine Textdatei schreiben
 //        writeMatrixToFile(convertIntArrayToDoubleArray(result), "result.txt");
-    }
-
-    public static void matrixAddition(double[][] matrixA, double[][] matrixB, double[][] result, int numThreads) {
-        int rows = matrixA.length;
-        int cols = matrixA[0].length;
-
-        ExecutorService executor = Executors.newFixedThreadPool(numThreads);
-
-        for (int i = 0; i < rows; i++) {
-            final int row = i;
-            executor.execute(() -> {
-                for (int j = 0; j < cols; j++) {
-                    result[row][j] = matrixA[row][j] + matrixB[row][j];
-                }
-            });
-        }
-
-        executor.shutdown();
-        try {
-            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void multiplyRowByMatrix(int[][] matrixA, int[][] matrixB, int[][] result, int row) {
-        for (int colB = 0; colB < matrixB[0].length; colB++) {
-            for (int k = 0; k < matrixA[0].length; k++) {
-                result[row][colB] += matrixA[row][k] * matrixB[k][colB];
-            }
-        }
     }
 
     private static void printMatrix(int[][] matrix) {
