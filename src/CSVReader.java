@@ -7,6 +7,13 @@ import java.util.List;
 
 public class CSVReader {
 
+    /**
+     * Liest eine Matrix aus der Matrix.csv Datei aus und verarbeitet sie so, dass am Ende ein zweidimensionales
+     * Double-Array zurückgegeben wird um im Code mit der Matrix zu arbeiten.
+     * @param fileName
+     * @param matrixIndex
+     * @return double[][] matrix
+     */
     public static double[][] readMatrixFromCSV(String fileName, int matrixIndex) {
         List<List<Double>> matrixData = readDataFromCSV(fileName, matrixIndex);
 
@@ -23,6 +30,16 @@ public class CSVReader {
         return matrix;
     }
 
+
+    /**
+     * Liest einen Vektor aus der Vector.csv Datei aus und verarbeitet ihn so, dass am Ende ein
+     * Double-Array zurückgegeben wird um im Code mit dem Vektor zu arbeiten.
+     * WICHTIG: Ein Vektor muss so geschrieben werden, dass die einzelnen Elemente mit
+     * Zeilenumbrüchen von oben nach unten getrennt werden!
+     * @param fileName
+     * @param vectorIndex der Index des Vektors (0 für den ersten Vektor, 1 für den Zweiten)
+     * @return double[] vector
+     */
     public static double[] readVectorFromCSV(String fileName, int vectorIndex) {
         List<List<Double>> vectorData = readDataFromCSV(fileName, vectorIndex);
 
@@ -36,6 +53,12 @@ public class CSVReader {
         return vector;
     }
 
+    /**
+     * Liest die Daten aus dem ...
+     * @param fileName
+     * @param dataIndex
+     * @return
+     */
     private static List<List<Double>> readDataFromCSV(String fileName, int dataIndex) {
         List<List<Double>> data = new ArrayList<>();
 

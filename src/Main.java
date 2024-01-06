@@ -20,6 +20,11 @@ public class Main {
 
         // System.out.println("Öffnen Sie die \"Matrix.csv\" oder \"Vektor.csv\" und geben Sie dort die gewünschten Matrizen / Vektoren ein.");
 
+
+        printMatrix(CSVReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/Matrix.csv", 0));
+
+        printVector(CSVReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/Vector.csv", 1));
+
         boolean validInput = false;
 
         while (!validInput)
@@ -123,12 +128,18 @@ public class Main {
         }
     }
 
-    private static void printMatrix(int[][] matrix) {
-        for (int[] row : matrix) {
-            for (int value : row) {
+    private static void printMatrix(double[][] matrix) {
+        for (double[] row : matrix) {
+            for (double value : row) {
                 System.out.print(value + " ");
             }
             System.out.println();
+        }
+    }
+
+    private static void printVector(double[] vector) {
+        for (double value : vector) {
+            System.out.println(value + " ");
         }
     }
 
