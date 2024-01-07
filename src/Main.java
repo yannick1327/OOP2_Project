@@ -24,12 +24,12 @@ public class Main {
 
         //System.out.println("Bitte geben sie eine Zahl ein die mit dem Vektor / der Matrix verrechnet werden soll.");
         // System.out.println("Öffnen Sie die \"Vektor.csv\" und geben Sie dort den gewünschten Vektor ein.");
-        //System.out.println("Öffnen Sie die \"Matrix.csv\" und geben Sie dort die gewünschte Matrix ein.");
+        //System.out.println("Öffnen Sie die \"FileInput.csv\" und geben Sie dort die gewünschte Matrix ein.");
 
 
-        printMatrix(CSVReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/Matrix.csv", 0));
+        printMatrix(CSVReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FileInput.csv"));
 
-        printVector(CSVReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/Vector.csv", 1));
+        printVector(CSVReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv"));
 
         boolean validInput = false;
 
@@ -79,22 +79,28 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
 
-        TasktypeMatrixoperations returnValue ;
+        TasktypeMatrixoperations returnValue;
         switch (Integer.parseInt(input))
         {
-            case (1):
+            case 1:
                 returnValue = TasktypeMatrixoperations.MatrixAddition;
-            case (2):
+                break;
+            case 2:
                 returnValue = TasktypeMatrixoperations.MatrixSubtraction;
-            case (3):
+                break;
+            case 3:
                 returnValue = TasktypeMatrixoperations.MatrixProduct;
-            case (4):
+                break;
+            case 4:
                 returnValue = TasktypeMatrixoperations.MatrixVectorProduct;
-            case (5):
+                break;
+            case 5:
                 returnValue = TasktypeMatrixoperations.ScalarMultiplication;
-            default :
+                break;
+            default:
                 System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
                 returnValue = TasktypeMatrixoperations.Invalid;
+                break;
         }
         scanner.close();
         return returnValue;
@@ -119,14 +125,19 @@ public class Main {
         {
             case (1):
                 returnValue = TasktypeVectoroperations.VectorAddidtion;
+                break;
             case (2):
                 returnValue = TasktypeVectoroperations.VectorSubstraction;
+                break;
             case (3):
                 returnValue = TasktypeVectoroperations.VectorProduct;
+                break;
             case (4):
                 returnValue = TasktypeVectoroperations.ScalarMultiplication;
+                break;
             case (5):
                 returnValue = TasktypeVectoroperations.ScalarProduct;
+                break;
             default :
                 System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
                 returnValue = TasktypeVectoroperations.Invalid;
