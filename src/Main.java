@@ -3,6 +3,7 @@ import Enums.TasktypeVectoroperations;
 import MatrixOperations.MatrixAdditionAndSubtraction;
 import MatrixOperations.MatrixProduct;
 import MatrixOperations.ScalarMultiplication;
+import VectorOperations.ScalarProduct;
 import VectorOperations.VectorAdditionAndSubtraction;
 import VectorOperations.VectorProduct;
 import VectorOperations.VectorScalarMultiplication;
@@ -146,7 +147,7 @@ public class Main {
             double[] firstInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
             double[] secondInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
 
-            calculationClass = new VectorAdditionAndSubtraction(firstInput,secondInput,false);
+            calculationClass = new VectorAdditionAndSubtraction(firstInput,secondInput,true);
             VectorAdditionAndSubtraction castedClass = ((VectorAdditionAndSubtraction) calculationClass);
             castedClass.performOperation();
             result = castedClass.returnResult();
@@ -207,8 +208,8 @@ public class Main {
             double[] firstInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
             double[] secondInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
 
-            calculationClass = new VectorScalarMultiplication(firstInput,secondInput[0]);
-            VectorScalarMultiplication castedClass = ((VectorScalarMultiplication) calculationClass);
+            calculationClass = new ScalarProduct(firstInput,secondInput[0]);
+            ScalarProduct castedClass = ((ScalarProduct) calculationClass);
             castedClass.performOperation();
             result = castedClass.returnResult();
         } else {

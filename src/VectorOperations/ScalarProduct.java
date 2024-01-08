@@ -1,17 +1,13 @@
-package MatrixOperations;
+package VectorOperations;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-//
-// sehr wahrscheinlich bullshit und genau das gleiche wie die Klasse ScalarMultiplication
-//
+public class ScalarProduct extends VectorOperation {
 
-public class ScalarProduct extends MatrixOperation {
-
-    public ScalarProduct(double[][] matrix, double scalar) {
-        super(matrix, scalar);
+    public ScalarProduct(double[] vector, double scalar) {
+        super(vector, scalar);
     }
 
     @Override
@@ -36,6 +32,6 @@ public class ScalarProduct extends MatrixOperation {
     }
 
     private double scalarProductAtIndex(int row, int col) {
-        return matrixA[row][col] * scalar;
+        return vectorA[row][col] * scalar;
     }
 }
