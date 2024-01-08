@@ -12,10 +12,10 @@ public class Main {
 
         //System.out.println("Bitte geben sie eine Zahl ein die mit dem Vektor / der Matrix verrechnet werden soll.");
         // System.out.println("Öffnen Sie die \"Vektor.csv\" und geben Sie dort den gewünschten Vektor ein.");
-        //System.out.println("Öffnen Sie die \"FileInput.csv\" und geben Sie dort die gewünschte Matrix ein.");
+        //System.out.println("Öffnen Sie die \"FirstInput.csv\" und geben Sie dort die gewünschte Matrix ein.");
 
 
-        printMatrix(CSVReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FileInput.csv"));
+        printMatrix(CSVReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv"));
 
         printVector(CSVReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv"));
 
