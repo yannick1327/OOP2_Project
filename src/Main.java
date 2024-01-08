@@ -1,5 +1,12 @@
 import Enums.TasktypeMatrixoperations;
 import Enums.TasktypeVectoroperations;
+import MatrixOperations.MatrixAdditionAndSubtraction;
+import MatrixOperations.MatrixProduct;
+import MatrixOperations.ScalarMultiplication;
+import VectorOperations.VectorAdditionAndSubtraction;
+import VectorOperations.VectorProduct;
+import VectorOperations.VectorScalarMultiplication;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,6 +37,7 @@ public class Main {
 
             if (input.equalsIgnoreCase("M"))
             {
+                scanner.reset();
                 TasktypeMatrixoperations selectedTask = SelectMatrixoperation();
                 if (selectedTask != TasktypeMatrixoperations.Invalid){
                     validInput = true;
@@ -39,6 +47,7 @@ public class Main {
 
             } else if (input.equalsIgnoreCase("V"))
             {
+                scanner.reset();
                 TasktypeVectoroperations selectedTask = SelectVectoroperation();
                 if (selectedTask != TasktypeVectoroperations.Invalid){
                     validInput = true;
@@ -62,7 +71,7 @@ public class Main {
         for (TasktypeMatrixoperations taskType : TasktypeMatrixoperations.values())
         {
             if (taskType == TasktypeMatrixoperations.Invalid) continue;
-            System.out.println(enumerator + ":" + taskType);
+            System.out.println(enumerator + ": " + taskType);
             enumerator++;
         }
 
@@ -104,7 +113,7 @@ public class Main {
         for (TasktypeVectoroperations taskType : TasktypeVectoroperations.values())
         {
             if (taskType == TasktypeVectoroperations.Invalid) continue;
-            System.out.println(enumerator + ":" + taskType);
+            System.out.println(enumerator + ": " + taskType);
             enumerator++;
         }
 
@@ -143,32 +152,72 @@ public class Main {
             return;
         }
 
-        switch (selectedTask){
-            case VectorAddidtion :
-                //TODO eingabe in die CVS fordern
+        CSVReader csvReader = new CSVReader();
+        Scanner scanner = new Scanner(System.in);
 
-                //VectorAdditionAndSubtraction calculationClass = new VectorAdditionAndSubtraction<>(,,true);
-                break;
-            case VectorSubstraction:
-                //TODO eingabe in die CVS fordern
+        if (selectedTask == TasktypeVectoroperations.VectorAddidtion){
+            System.out.println("Bitte geben die in die \"FirstInput.csv\" einen Vektor ein.");
+            System.out.println("Bitte geben die in die \"SecondInput.csv\" einen zweiten Vektor ein der zu dem ersten addiert werden soll.");
+            System.out.println("Bestätigen sie ihre Eingaben indem sie \"C\" eingeben.");
 
-                //VectorAdditionAndSubtraction calculationClass = new VectorAdditionAndSubtraction<>(,,false);
-                break;
-            case VectorProduct:
-                //TODO eingabe in die CVS fordern
+            String input = scanner.nextLine();
+            if (!input.equalsIgnoreCase("C"))  return;
+            double[] firstInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
+            double[] secondInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
 
-                //VectorProduct calculationClass = new VectorProduct();
-                break;
-            case ScalarMultiplication:
-                //TODO eingabe in die CVS fordern
+            //VectorAdditionAndSubtraction calculationClass = new VectorAdditionAndSubtraction<>(firstInput,secondInput,false);
 
-                //ScalarMultiplication calculationClass = new ScalarMultiplication<>();
-                break;
-            case ScalarProduct:
-                //TODO eingabe in die CVS fordern
+        } else if (selectedTask == TasktypeVectoroperations.VectorSubstraction) {
+            System.out.println("Bitte geben die in die \"FirstInput.csv\" einen Vektor ein.");
+            System.out.println("Bitte geben die in die \"SecondInput.csv\" einen zweiten Vektor ein der vom ersten subtrahiert werden soll.");
+            System.out.println("Bestätigen sie ihre Eingaben indem sie \"C\" eingeben.");
 
-                //VectorScalarMultiplication calculationClass = new VectorScalarMultiplication<>();
-                break;
+            String input = scanner.nextLine();
+            if (!input.equalsIgnoreCase("C"))  return;
+            double[] firstInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
+            double[] secondInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
+
+            //VectorAdditionAndSubtraction calculationClass = new VectorAdditionAndSubtraction<>(firstInput,secondInput,true);
+
+        } else if (selectedTask == TasktypeVectoroperations.VectorProduct) {
+            System.out.println("Bitte geben die in die \"FirstInput.csv\" einen Vektor ein.");
+            System.out.println("Bitte geben die in die \"SecondInput.csv\" einen zweiten Vektor, mit dem das Kreuzprodukt gebildet werden soll.");
+            System.out.println("Bestätigen sie ihre Eingaben indem sie \"C\" eingeben.");
+
+            String input = scanner.nextLine();
+            if (!input.equalsIgnoreCase("C")) return;
+            double[] firstInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
+            double[] secondInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
+
+            //VectorProduct calculationClass = new VectorProduct(firstInput,secondInput);
+
+        } else if (selectedTask == TasktypeVectoroperations.ScalarMultiplication){
+            System.out.println("Bitte geben die in die \"FirstInput.csv\" einen Vektor ein.");
+            System.out.println("Bitte geben die in die \"SecondInput.csv\" ein Skalar ein, mit dem eine Skalarmultiplikation durchgeführt werden soll.");
+            System.out.println("Bestätigen sie ihre Eingaben indem sie \"C\" eingeben.");
+
+            String input = scanner.nextLine();
+            if (!input.equalsIgnoreCase("C")) return;
+
+            double[] firstInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
+            double[] secondInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
+
+            //ScalarMultiplication calculationClass = new ScalarMultiplication<>();
+
+        } else if (selectedTask == TasktypeVectoroperations.ScalarProduct) {
+            System.out.println("Bitte geben die in die \"FirstInput.csv\" ein Skalar ein.");
+            System.out.println("Bitte geben die in die \"SecondInput.csv\" einen Vektor ein, mit dem das Skalarprodukt gebildet werden soll.");
+            System.out.println("Bestätigen sie ihre Eingaben indem sie \"C\" eingeben.");
+
+            String input = scanner.nextLine();
+            if (!input.equalsIgnoreCase("C")) return;
+            double[] firstInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
+            double[] secondInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
+
+            //VectorScalarMultiplication calculationClass = new VectorScalarMultiplication<>(firstInput,secondInput[0]);
+        } else {
+
+           System.out.println("%% Ein Fehler ist aufgetreten beim matching des selectedTasks. %%");
         }
 
         //calculationClass.performOperation();
@@ -178,11 +227,10 @@ public class Main {
 
         System.out.println("Geben sie \"J\" ein das Ergebnis auch in die CSV Datei geschrieben werden soll.");
         System.out.println("Nach der Eingabe wird das Programm beendet.");
-        Scanner scanner = new Scanner(System.in);
+
         String input = scanner.nextLine();
         if(input.equalsIgnoreCase("J")){
-            // writeResultToFile();
-            System.out.println("t1v");
+            //writeResultToFile(result);
         }
         scanner.reset();
     }
@@ -193,47 +241,92 @@ public class Main {
             return;
         }
 
-        switch (selectedTask){
-            case MatrixAddition:
-                //TODO eingabe in die CVS fordern
+        CSVReader csvReader = new CSVReader();
+        Scanner scanner = new Scanner(System.in);
 
+        if(selectedTask == TasktypeMatrixoperations.MatrixAddition){
+            System.out.println("Bitte geben die in die \"FirstInput.csv\" eine Matrix ein.");
+            System.out.println("Bitte geben die in die \"SecondInput.csv\" eine Matrix ein, die zur ersten addiert werden soll.");
+            System.out.println("Bestätigen sie ihre Eingaben indem sie \"C\" eingeben.");
 
-                //MatrixAdditionAndSubtraction calculationClass  = new MatrixAdditionAndSubtraction<>();
-                break;
-            case MatrixSubtraction:
-                //TODO eingabe in die CVS fordern
+            String input = scanner.nextLine();
+            if (!input.equalsIgnoreCase("C")) return;
+            double[][] firstInput = csvReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
+            double[][] secondInput = csvReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
 
-                //MatrixAdditionAndSubtraction calculationClass  = new MatrixAdditionAndSubtraction<>();
-                break;
-            case MatrixProduct:
-                //TODO eingabe in die CVS fordern
+            //MatrixAdditionAndSubtraction calculationClass  = new MatrixAdditionAndSubtraction(firstInput,secondInput,true);
 
-                //MatrixProduct calculationClass = new MatrixProduct();
-                break;
-            case MatrixVectorProduct:
-                //TODO eingabe in die CVS fordern
+        } else if (selectedTask == TasktypeMatrixoperations.MatrixSubtraction) {
+            System.out.println("Bitte geben die in die \"FirstInput.csv\" eine Matrix ein.");
+            System.out.println("Bitte geben die in die \"SecondInput.csv\" eine Matrix ein, von der ersten subtrahiert werden soll.");
+            System.out.println("Bestätigen sie ihre Eingaben indem sie \"C\" eingeben.");
 
-                // 2ter vektor ist einfach nur eindimesional deshalb der selbe aufruf
-                //MatrixProduct calculationClass = new MatrixProduct();
-                break;
-            case ScalarMultiplication:
-                //TODO eingabe in die CVS fordern
+            String input = scanner.nextLine();
+            if (!input.equalsIgnoreCase("C")) return;
+            double[][] firstInput = csvReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
+            double[][] secondInput = csvReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
 
-                //ScalarMultiplication calculationClass = new ScalarMultiplication<>();
-                break;
+            //MatrixAdditionAndSubtraction calculationClass  = new MatrixAdditionAndSubtraction<>(firstInput,secondInput,false);
+
+        } else if (selectedTask == TasktypeMatrixoperations.MatrixProduct) {
+            System.out.println("Bitte geben die in die \"FirstInput.csv\" eine Matrix ein.");
+            System.out.println("Bitte geben die in die \"SecondInput.csv\" eine Matrix ein, mit dem das Matrixprodukt gebildet werden soll.");
+            System.out.println("Bestätigen sie ihre Eingaben indem sie \"C\" eingeben.");
+
+            String input = scanner.nextLine();
+            if (!input.equalsIgnoreCase("C")) return;
+            double[][] firstInput = csvReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
+            double[][] secondInput = csvReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
+
+            //MatrixProduct calculationClass = new MatrixProduct(firstInput,secondInput);
+
+        } else if (selectedTask == TasktypeMatrixoperations.MatrixVectorProduct) {
+            System.out.println("Bitte geben die in die \"FirstInput.csv\" eine Matrix ein.");
+            System.out.println("Bitte geben die in die \"SecondInput.csv\" einen Vektor ein, mit dem das Matrix-Vector-Produkt gebildet werden soll.");
+            System.out.println("Bestätigen sie ihre Eingaben indem sie \"C\" eingeben.");
+
+            String input = scanner.nextLine();
+            if (!input.equalsIgnoreCase("C")) return;
+            double[][] firstInput = csvReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
+            double[] rawSecondInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
+
+            double[][] secondInput = new double[][]{};
+            secondInput[0][0] = rawSecondInput[0];
+            secondInput[1][0] = rawSecondInput[1];
+            secondInput[2][0] = rawSecondInput[2];
+
+            PrintMethods temp = new PrintMethods();
+            temp.printResult(secondInput);
+
+            //MatrixProduct calculationClass = new MatrixProduct(firstInput,secondInput);
+
+        } else if (selectedTask == TasktypeMatrixoperations.ScalarMultiplication) {
+            System.out.println("Bitte geben die in die \"FirstInput.csv\" ein Skalar ein.");
+            System.out.println("Bitte geben die in die \"SecondInput.csv\" eine Matrix ein, mit der das Skalarprodukt gebildet werden soll.");
+            System.out.println("Bestätigen sie ihre Eingaben indem sie \"C\" eingeben.");
+
+            String input = scanner.nextLine();
+            if (!input.equalsIgnoreCase("C")) return;
+            double[] firstInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
+            double[][] secondInput = csvReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
+
+            //ScalarMultiplication calculationClass = new ScalarMultiplication<>(secondInput,firstInput[0]);
+
+        } else {
+            System.out.println("%% Ein Fehler ist aufgetreten beim matching des selectedTasks. %%");
         }
+
         //calculationClass.performOperation();
-        //double[] result = calculationClass.returnResult();
+        //double[][] result = calculationClass.returnResult();
         PrintMethods printMethods = new PrintMethods();
         //printMethods.printResult(result);
 
         System.out.println("Geben sie \"J\" ein das Ergebnis auch in die CSV Datei geschrieben werden soll.");
         System.out.println("Nach der Eingabe wird das Programm beendet.");
-        Scanner scanner = new Scanner(System.in);
+
         String input = scanner.nextLine();
         if(input.equalsIgnoreCase("J")){
-            // writeResultToFile();
-            System.out.println("t1m");
+            // writeMatrixToFile(result);
         }
         scanner.reset();
     }
