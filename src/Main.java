@@ -11,16 +11,29 @@ import VectorOperations.VectorScalarMultiplication;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
 
     public static void main(String[] args) {
 
-        //System.out.println("Bitte geben sie eine Zahl ein die mit dem Vektor / der Matrix verrechnet werden soll.");
-        // System.out.println("Öffnen Sie die \"Vektor.csv\" und geben Sie dort den gewünschten Vektor ein.");
-        //System.out.println("Öffnen Sie die \"FirstInput.csv\" und geben Sie dort die gewünschte Matrix ein.");
+        /**
+         * folgender Code ist nur zu Demonstrationszwecken erstellt worden und ist nicht Teil
+         * des Hauptprogramms
+         */
+        double[][] matrixA = generateRandomMatrix(1500, 1500);
+        double[][] matrixB = generateRandomMatrix(1500, 1500);
+
+        // multiplyMatrices(matrixA, matrixB);
+
+        int maxAvailableThreads = Runtime.getRuntime().availableProcessors();
+        multiplyMatricesWithThreads(matrixA, matrixB, maxAvailableThreads);
+
         PrintMethods printMethods = new PrintMethods();
         CSVReader csvReader = new CSVReader();
 
@@ -381,18 +394,77 @@ public class Main {
         }
     }
 
-    public static double[][] convertIntArrayToDoubleArray(int[][] intArray) {
-        int rows = intArray.length;
-        int cols = intArray[0].length;
+    /**
+     * Methode führt eine Matrixmultiplikation OHNE Multithreading aus.
+     * Wird nur für den Unterschied der Ausführungsgeschwindigkeit genutzt.
+     * WICHTIG: nicht für die Nutzung im Hauptprogramm bestimmt!
+     */
+    public static void multiplyMatrices(double[][] matrixA, double[][] matrixB) {
+        int rowsA = matrixA.length;
+        int colsA = matrixA[0].length;
+        int colsB = matrixB[0].length;
 
-        double[][] doubleArray = new double[rows][cols];
+        double[][] result = new double[rowsA][colsB];
+
+        for (int i = 0; i < rowsA; i++) {
+            for (int j = 0; j < colsB; j++) {
+                for (int k = 0; k < colsA; k++) {
+                    result[i][j] += matrixA[i][k] * matrixB[k][j];
+                }
+            }
+        }
+
+        PrintMethods printMethods = new PrintMethods();
+        printMethods.printResult(result);
+    }
+
+    /**
+     * Methode führt eine Matrixmultiplikation MIT Multithreading aus.
+     * Wird nur für den Unterschied der Ausführungsgeschwindigkeit genutzt.
+     * WICHTIG: nicht für die Nutzung im Hauptprogramm bestimmt!
+     */
+    public static void multiplyMatricesWithThreads(double[][] matrixA, double[][] matrixB, int numThreads) {
+        int rowsA = matrixA.length;
+        int colsA = matrixA[0].length;
+        int colsB = matrixB[0].length;
+
+        double[][] result = new double[rowsA][colsB];
+
+        ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
+
+        for (int i = 0; i < rowsA; i++) {
+            final int row = i;
+            executorService.execute(() -> {
+                for (int j = 0; j < colsB; j++) {
+                    for (int k = 0; k < colsA; k++) {
+                        result[row][j] += matrixA[row][k] * matrixB[k][j];
+                    }
+                }
+            });
+        }
+
+        executorService.shutdown();
+        try {
+            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        PrintMethods printMethods = new PrintMethods();
+        printMethods.printResult(result);
+    }
+
+    public static double[][] generateRandomMatrix(int rows, int cols) {
+        Random random = new Random();
+        double[][] matrix = new double[rows][cols];
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                doubleArray[i][j] = (double) intArray[i][j]; // Umwandlung von int zu double
+                matrix[i][j] = random.nextDouble();
             }
         }
-        return doubleArray;
+
+        return matrix;
     }
 }
 
