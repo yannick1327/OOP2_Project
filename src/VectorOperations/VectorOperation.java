@@ -1,26 +1,26 @@
 package VectorOperations;
 
-abstract class VectorOperation<T extends Number> {
-    protected T[] vectorA;
-    protected T[] vectorB;
-    protected T scalar;
-    protected T[] result;
+abstract class VectorOperation {
+    protected double[] vectorA;
+    protected double[] vectorB;
+    protected double scalar;
+    protected double[] result;
 
-    public VectorOperation(T[] vectorA, T[] vectorB) {
+    public VectorOperation(double[] vectorA, double[] vectorB) {
         this.vectorA = vectorA;
         this.vectorB = vectorB;
-        this.result = (T[]) new Number[vectorA.length];
+        this.result = new double[vectorA.length];
     }
 
-    public VectorOperation(T[] vectorA, T scalar) {
+    public VectorOperation(double[] vectorA, double scalar) {
         this.vectorA = vectorA;
         this.scalar = scalar;
-        this.result = (T[]) new Number[vectorA.length];
+        this.result = new double[vectorA.length];
     }
 
     public abstract void performOperation();
 
-    public T[] returnResult() {
+    public double[] returnResult() {
         return result;
     }
 }

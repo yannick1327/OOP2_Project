@@ -4,11 +4,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class VectorAdditionAndSubtraction<T extends Number> extends VectorOperation<T> {
+public class VectorAdditionAndSubtraction extends VectorOperation {
 
     boolean isAddition;
     
-    public VectorAdditionAndSubtraction(T[] vectorA, T[] vectorB, boolean isAddition) {
+    public VectorAdditionAndSubtraction(double[] vectorA, double[] vectorB, boolean isAddition) {
         super(vectorA, vectorB);
         this.isAddition = isAddition;
     }
@@ -37,11 +37,11 @@ public class VectorAdditionAndSubtraction<T extends Number> extends VectorOperat
         }
     }
 
-    private T addVectorsAtIndex(int index) {
-        return (T) Double.valueOf(vectorA[index].doubleValue() + vectorB[index].doubleValue());
+    private double addVectorsAtIndex(int index) {
+        return vectorA[index] + vectorB[index];
     }
 
-    private T subtractVectorsAtIndex(int index) {
-        return (T) Double.valueOf(vectorA[index].doubleValue() - vectorB[index].doubleValue());
+    private double subtractVectorsAtIndex(int index) {
+        return vectorA[index] - vectorB[index];
     }
 }
