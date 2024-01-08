@@ -60,7 +60,6 @@ public class Main {
                 System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
             }
             scanner.close();
-            System.out.println("Das Programm ist nun beendet.");
         }
     }
 
@@ -208,19 +207,19 @@ public class Main {
             double[] firstInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
             double[] secondInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
 
-            calculationClass = new ScalarProduct(firstInput,secondInput[0]);
+            calculationClass = new ScalarProduct(firstInput,secondInput);
             ScalarProduct castedClass = ((ScalarProduct) calculationClass);
             castedClass.performOperation();
             result = castedClass.returnResult();
-        } else {
 
+        } else {
            System.out.println("%% Ein Fehler ist aufgetreten beim matching des selectedTasks. %%");
         }
 
         PrintMethods printMethods = new PrintMethods();
         if (result == null) return;
         printMethods.printResult(result);
-
+        System.out.println();
         System.out.println("Geben sie \"J\" ein das Ergebnis auch in die CSV Datei geschrieben werden soll.");
         System.out.println("Nach der Eingabe wird das Programm beendet.");
 

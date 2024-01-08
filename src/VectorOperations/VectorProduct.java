@@ -16,7 +16,7 @@ public class VectorProduct extends VectorOperation {
 
         for (int i = 0; i < vectorA.length; i++) {
             final int index = i;
-            executor.execute(() -> result[index] += multiplyVectorsAtIndex(index));
+            executor.execute(() -> result[index] = multiplyVectorsAtIndex(index));
         }
 
         executor.shutdown();

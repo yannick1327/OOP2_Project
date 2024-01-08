@@ -6,21 +6,17 @@ import java.util.concurrent.TimeUnit;
 
 public class ScalarProduct extends VectorOperation {
 
-    public ScalarProduct(double[] vector, double scalar) {
-        super(vector, scalar);
+    public ScalarProduct(double[] vectorA, double[] vectorB) {
+        super(vectorA, vectorB);
     }
 
     @Override
     public void performOperation() {
-        ExecutorService executor = Executors.newFixedThreadPool(rows * cols);
+        ExecutorService executor = Executors.newFixedThreadPool(vectorA.length * vectorB.length);
 
-        for (int i = 0; i < rows; i++) {
+        for (int i = 0; i < vectorA.length; i++) {
             final int row = i;
-            executor.execute(() -> {
-                for (int j = 0; j < cols; j++) {
-                    result[row][j] = scalarProductAtIndex(row, j);
-                }
-            });
+            executor.execute(() -> result[row] = scalarProductAtIndex(row));
         }
 
         executor.shutdown();
@@ -29,9 +25,15 @@ public class ScalarProduct extends VectorOperation {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        int i = 0;
+        for (double j : result) {
+            i =  i + (int)j;
+        }
+        result = new double[]{i};
     }
 
-    private double scalarProductAtIndex(int row, int col) {
-        return vectorA[row][col] * scalar;
+    private double scalarProductAtIndex(int index) {
+        return vectorA[index] * vectorB[index];
     }
 }
