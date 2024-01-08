@@ -13,11 +13,11 @@ public class Main {
         //System.out.println("Bitte geben sie eine Zahl ein die mit dem Vektor / der Matrix verrechnet werden soll.");
         // System.out.println("Öffnen Sie die \"Vektor.csv\" und geben Sie dort den gewünschten Vektor ein.");
         //System.out.println("Öffnen Sie die \"FirstInput.csv\" und geben Sie dort die gewünschte Matrix ein.");
+        PrintMethods printMethods = new PrintMethods();
+        CSVReader csvReader = new CSVReader();
 
-
-        printMatrix(CSVReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv"));
-
-        printVector(CSVReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv"));
+        printMethods.printResult(csvReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv"));
+        printMethods.printResult(csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv"));
 
         boolean validInput = false;
 
@@ -50,6 +50,7 @@ public class Main {
                 System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
             }
             scanner.close();
+            System.out.println("Das Programm ist nun beendet.");
         }
     }
 
@@ -58,9 +59,10 @@ public class Main {
         System.out.println("Geben die die Zahl der Operation ein die sie ausführen möchten.");
         System.out.println("Auswahlmöglichkeiten:");
         int enumerator = 1;
-        for (TasktypeMatrixoperations tasktype : TasktypeMatrixoperations.values())
+        for (TasktypeMatrixoperations taskType : TasktypeMatrixoperations.values())
         {
-            System.out.println(enumerator + ":" + tasktype);
+            if (taskType == TasktypeMatrixoperations.Invalid) continue;
+            System.out.println(enumerator + ":" + taskType);
             enumerator++;
         }
 
@@ -90,7 +92,7 @@ public class Main {
                 returnValue = TasktypeMatrixoperations.Invalid;
                 break;
         }
-        scanner.close();
+        scanner.reset();
         return returnValue;
     }
 
@@ -99,9 +101,10 @@ public class Main {
         System.out.println("Geben die die Zahl der Operation ein die sie ausführen möchten.");
         System.out.println("Auswahlmöglichkeiten:");
         int enumerator = 1;
-        for (TasktypeVectoroperations tasktype : TasktypeVectoroperations.values())
+        for (TasktypeVectoroperations taskType : TasktypeVectoroperations.values())
         {
-            System.out.println(enumerator + ":" + tasktype);
+            if (taskType == TasktypeVectoroperations.Invalid) continue;
+            System.out.println(enumerator + ":" + taskType);
             enumerator++;
         }
 
@@ -130,7 +133,7 @@ public class Main {
                 System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
                 returnValue = TasktypeVectoroperations.Invalid;
         }
-        scanner.close();
+        scanner.reset();
         return returnValue;
     }
 
@@ -169,8 +172,9 @@ public class Main {
         }
 
         //calculationClass.performOperation();
-        //calculationClass.returnResult();
-        //TODO das result in der Console ausgeben
+        //double[] result = calculationClass.returnResult();
+        PrintMethods printMethods = new PrintMethods();
+        //printMethods.printResult(result);
 
         System.out.println("Geben sie \"J\" ein das Ergebnis auch in die CSV Datei geschrieben werden soll.");
         System.out.println("Nach der Eingabe wird das Programm beendet.");
@@ -178,7 +182,9 @@ public class Main {
         String input = scanner.nextLine();
         if(input.equalsIgnoreCase("J")){
             // writeResultToFile();
+            System.out.println("t1v");
         }
+        scanner.reset();
     }
 
     private static void RunSelectedTask(TasktypeMatrixoperations selectedTask)
@@ -217,8 +223,9 @@ public class Main {
                 break;
         }
         //calculationClass.performOperation();
-        //calculationClass.returnResult();
-        //TODO das result in der Console ausgeben
+        //double[] result = calculationClass.returnResult();
+        PrintMethods printMethods = new PrintMethods();
+        //printMethods.printResult(result);
 
         System.out.println("Geben sie \"J\" ein das Ergebnis auch in die CSV Datei geschrieben werden soll.");
         System.out.println("Nach der Eingabe wird das Programm beendet.");
@@ -226,22 +233,9 @@ public class Main {
         String input = scanner.nextLine();
         if(input.equalsIgnoreCase("J")){
             // writeResultToFile();
+            System.out.println("t1m");
         }
-    }
-
-    private static void printMatrix(double[][] matrix) {
-        for (double[] row : matrix) {
-            for (double value : row) {
-                System.out.print(value + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    private static void printVector(double[] vector) {
-        for (double value : vector) {
-            System.out.println(value + " ");
-        }
+        scanner.reset();
     }
 
     public static void writeResultToFile(double[] result, String fileName) {

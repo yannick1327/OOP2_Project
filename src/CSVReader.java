@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CSVReader {
@@ -15,7 +14,7 @@ public class CSVReader {
      * @param fileName
      * @return double[][] matrix - vollständige Matrix als zweidimensionales Double Array
      */
-    public static double[][] readMatrixFromCSV(String fileName) {
+    public double[][] readMatrixFromCSV(String fileName) {
         List<String> lines = readLinesFromCSV(fileName);
         return parseMatrix(lines);
     }
@@ -28,7 +27,7 @@ public class CSVReader {
      * @param fileName Der Pfad und Dateiname der CSV-Datei
      * @return double[] vector - vollständiger Vektor als Double Array
      */
-    public static double[] readVectorFromCSV(String fileName) {
+    public double[] readVectorFromCSV(String fileName) {
         List<String> lines = readLinesFromCSV(fileName);
         return parseVector(lines);
     }
@@ -39,7 +38,7 @@ public class CSVReader {
      * @param fileName Der Pfad und Dateiname der Datei
      * @return List<String> lines - Liste von Strings
      */
-    private static List<String> readLinesFromCSV(String fileName) {
+    private List<String> readLinesFromCSV(String fileName) {
         List<String> lines = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -62,7 +61,7 @@ public class CSVReader {
      * @param lines Liste von Strings mit ihren Elementen
      * @return double[][] matrix - vollständige Matrix als zweidimensionales Double Array
      */
-    private static double[][] parseMatrix(List<String> lines) {
+    private double[][] parseMatrix(List<String> lines) {
         int numRows = lines.size();
         int numCols = lines.get(0).split(",").length;
 
@@ -85,7 +84,7 @@ public class CSVReader {
      * @param lines Liste von Strings mit ihren Elementen
      * @return double[] vector - vollständiger Vektor als Double Array
      */
-    private static double[] parseVector(List<String> lines) {
+    private double[] parseVector(List<String> lines) {
         String[] values = lines.get(0).split(",");
         int length = values.length;
         double[] vector = new double[length];
