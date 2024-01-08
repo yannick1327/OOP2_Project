@@ -4,11 +4,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class MatrixAdditionAndSubtraction<T extends Number> extends MatrixOperation<T> {
+public class MatrixAdditionAndSubtraction extends MatrixOperation {
 
     private boolean isAddition;
 
-    public MatrixAdditionAndSubtraction(T[][] matrixA, T[][] matrixB, boolean isAddition) {
+    public MatrixAdditionAndSubtraction(double[][] matrixA, double[][] matrixB, boolean isAddition) {
         super(matrixA, matrixB);
         this.isAddition = isAddition;
     }
@@ -34,11 +34,11 @@ public class MatrixAdditionAndSubtraction<T extends Number> extends MatrixOperat
         }
     }
 
-    private T addMatricesAtIndex(int row, int col) {
-        return (T) Double.valueOf(matrixA[row][col].doubleValue() + matrixB[row][col].doubleValue());
+    private double addMatricesAtIndex(int row, int col) {
+        return matrixA[row][col] + matrixB[row][col];
     }
 
-    private T subtractMatricesAtIndex(int row, int col) {
-        return (T) Double.valueOf(matrixA[row][col].doubleValue() - matrixB[row][col].doubleValue());
+    private double subtractMatricesAtIndex(int row, int col) {
+        return matrixA[row][col] - matrixB[row][col];
     }
 }
