@@ -9,18 +9,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        // Beispielmatrizen
-//        int[][] matrixA = {{1, 2, 3},
-//                {4, 5, 6},
-//                {7, 8, 9}};
-//        int[][] matrixB = {{9, 8, 7},
-//                {6, 5, 4},
-//                {3, 2, 1}};
-
-        // Anzahl der Threads (kann angepasst werden)
-        // Gibt zurück wie viele Threads der Runtime zur Verfügung stehen (normalerweise so viele wie viele Threads die CPU hat bei mir 16)
-        // int numThreads = Runtime.getRuntime().availableProcessors();
-        // ExecutorService executor = Executors.newFixedThreadPool(numThreads);
 
         //System.out.println("Bitte geben sie eine Zahl ein die mit dem Vektor / der Matrix verrechnet werden soll.");
         // System.out.println("Öffnen Sie die \"Vektor.csv\" und geben Sie dort den gewünschten Vektor ein.");
@@ -297,3 +285,17 @@ public class Main {
         return doubleArray;
     }
 }
+
+//class MyThread extends Thread {
+//    @Override
+//    public void run() {
+//        // Code, den der Thread ausführen soll
+//    }
+//}
+//
+//class MyRunnable implements Runnable {
+//    @Override
+//    public void run() {
+//        // Code, den der Thread ausführen soll
+//    }
+//}

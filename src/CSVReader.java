@@ -8,21 +8,37 @@ import java.util.List;
 public class CSVReader {
 
     /**
-     * Liest eine Matrix aus der FileInput.csv Datei aus und verarbeitet sie so, dass am Ende ein zweidimensionales
-     * Double-Array zurückgegeben wird um im Code mit der Matrix zu arbeiten.
+     * Liest eine Matrix aus einer CSV-Datei aus und verarbeitet sie so, dass am Ende ein
+     * zweidimensionales Double-Array zurückgegeben wird um im Code mit der Matrix zu arbeiten.
+     * WICHTIG: Die Matrix muss so geschrieben sein, dass die einzelnen Elemente durch ein Komma
+     * und die einzelnen Reihen durch einen Zeilenumbruch getrennt sind!
      * @param fileName
-     * @return double[][] matrix
+     * @return double[][] matrix - vollständige Matrix als zweidimensionales Double Array
      */
     public static double[][] readMatrixFromCSV(String fileName) {
         List<String> lines = readLinesFromCSV(fileName);
         return parseMatrix(lines);
     }
 
+    /**
+     * Liest einen Vektor aus einer CSV-Datei aus und verarbeitet ihn so, dass am Ende ein
+     * Double-Array zurückgegeben wird um im Code mit dem Vektor zu arbeiten.
+     * WICHTIG: Ein Vektor muss so geschrieben werden, dass die einzelnen Elemente mit
+     * Kommas von getrennt werden!
+     * @param fileName Der Pfad und Dateiname der CSV-Datei
+     * @return double[] vector - vollständiger Vektor als Double Array
+     */
     public static double[] readVectorFromCSV(String fileName) {
         List<String> lines = readLinesFromCSV(fileName);
         return parseVector(lines);
     }
 
+    /**
+     * Liest eine Datei und gibt die einzelnen Zeilen mit ihren Inhalten
+     * als Liste von Strings zurück.
+     * @param fileName Der Pfad und Dateiname der Datei
+     * @return List<String> lines - Liste von Strings
+     */
     private static List<String> readLinesFromCSV(String fileName) {
         List<String> lines = new ArrayList<>();
 
@@ -39,6 +55,13 @@ public class CSVReader {
         return lines;
     }
 
+    /**
+     * Nimmt die einzelnen Zeilen und teilt sie in Reihen und Zeilen auf.
+     * Konvertiert die aufgeteilten Elemente in Fließkommazahlen um und schreibt
+     * sie in der richtigen Reihenfolge als Matrix in ein zweidimensionales Double Array.
+     * @param lines Liste von Strings mit ihren Elementen
+     * @return double[][] matrix - vollständige Matrix als zweidimensionales Double Array
+     */
     private static double[][] parseMatrix(List<String> lines) {
         int numRows = lines.size();
         int numCols = lines.get(0).split(",").length;
@@ -55,6 +78,13 @@ public class CSVReader {
         return matrix;
     }
 
+    /**
+     * Nimmt die einzelnen Zeilen und teilt sie in einzelne Elemente auf.
+     * Konvertiert die aufgeteilten Elemente in Fließkommazahlen um und schreibt
+     * sie in der richtigen Reihenfolge als Vektor in ein Double Array.
+     * @param lines Liste von Strings mit ihren Elementen
+     * @return double[] vector - vollständiger Vektor als Double Array
+     */
     private static double[] parseVector(List<String> lines) {
         String[] values = lines.get(0).split(",");
         int length = values.length;
@@ -63,22 +93,6 @@ public class CSVReader {
         for (int i = 0; i < length; i++) {
             vector[i] = Double.parseDouble(values[i]);
         }
-
         return vector;
     }
-
-
-
-
-
-    /**
-     * Liest einen Vektor aus der SecondInput.csv Datei aus und verarbeitet ihn so, dass am Ende ein
-     * Double-Array zurückgegeben wird um im Code mit dem Vektor zu arbeiten.
-     * WICHTIG: Ein Vektor muss so geschrieben werden, dass die einzelnen Elemente mit
-     * Zeilenumbrüchen von oben nach unten getrennt werden!
-     * @param fileName
-     * @param vectorIndex der Index des Vektors (0 für den ersten Vektor, 1 für den Zweiten)
-     * @return double[] vector
-     */
-
 }
