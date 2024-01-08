@@ -344,9 +344,15 @@ public class Main {
 
     public static void writeResultToFile(double[] result, String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-            for (double val : result) {
-                writer.write(String.valueOf(val));
-                writer.newLine();
+            for (double value : result) {
+                if (value == (int) value) {
+                    int intValue = (int) value;
+                    writer.write(String.valueOf(intValue));
+                    writer.newLine();
+                } else {
+                    writer.write(String.valueOf(value));
+                    writer.newLine();
+                }
             }
             System.out.println("Results written to: " + fileName);
         } catch (IOException e) {
@@ -357,9 +363,15 @@ public class Main {
     public static void writeMatrixToFile(double[][] matrix, String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (double[] row : matrix) {
-                for (double val : row) {
-                    writer.write(String.valueOf(val));
-                    writer.write(" "); // Trennzeichen zwischen den Elementen
+                for (double value : row) {
+                    if (value == (int) value) {
+                        int intValue = (int) value;
+                        writer.write(String.valueOf(intValue));
+                        writer.write(" "); // Trennzeichen zwischen den Elementen
+                    } else {
+                        writer.write(String.valueOf(value));
+                        writer.write(" "); // Trennzeichen zwischen den Elementen
+                    }
                 }
                 writer.newLine();
             }
