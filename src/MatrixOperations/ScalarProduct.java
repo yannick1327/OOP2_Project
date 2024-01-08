@@ -8,9 +8,9 @@ import java.util.concurrent.TimeUnit;
 // sehr wahrscheinlich bullshit und genau das gleiche wie die Klasse ScalarMultiplication
 //
 
-public class ScalarProduct<T extends Number> extends MatrixOperation<T> {
+public class ScalarProduct extends MatrixOperation {
 
-    public ScalarProduct(T[][] matrix, T scalar) {
+    public ScalarProduct(double[][] matrix, double scalar) {
         super(matrix, scalar);
     }
 
@@ -35,7 +35,7 @@ public class ScalarProduct<T extends Number> extends MatrixOperation<T> {
         }
     }
 
-    private T scalarProductAtIndex(int row, int col) {
-        return (T) Double.valueOf(matrixA[row][col].doubleValue() * scalar.doubleValue());
+    private double scalarProductAtIndex(int row, int col) {
+        return matrixA[row][col] * scalar;
     }
 }

@@ -4,9 +4,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class ScalarMultiplication<T extends Number> extends MatrixOperation<T> {
+public class ScalarMultiplication extends MatrixOperation {
 
-    public ScalarMultiplication(T[][] matrix, T scalar) {
+    public ScalarMultiplication(double[][] matrix, double scalar) {
         super(matrix, scalar);
     }
 
@@ -31,7 +31,7 @@ public class ScalarMultiplication<T extends Number> extends MatrixOperation<T> {
         }
     }
 
-    private T multiplyMatrixElementByScalar(int row, int col) {
-        return (T) Double.valueOf(matrixA[row][col].doubleValue() * scalar.doubleValue());
+    private double multiplyMatrixElementByScalar(int row, int col) {
+        return matrixA[row][col] * scalar;
     }
 }

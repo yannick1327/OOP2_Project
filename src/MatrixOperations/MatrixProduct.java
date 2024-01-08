@@ -4,9 +4,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class MatrixProduct<T extends Number> extends MatrixOperation<T> {
+public class MatrixProduct extends MatrixOperation {
 
-    public MatrixProduct(T[][] matrixA, T[][] matrixB) {
+    public MatrixProduct(double[][] matrixA, double[][] matrixB) {
         super(matrixA, matrixB);
     }
 
@@ -31,11 +31,11 @@ public class MatrixProduct<T extends Number> extends MatrixOperation<T> {
         }
     }
 
-    private T multiplyMatricesAtIndex(int row, int col) {
+    private double multiplyMatricesAtIndex(int row, int col) {
         double sum = 0.0;
         for (int k = 0; k < matrixA[0].length; k++) {
-            sum += matrixA[row][k].doubleValue() * matrixB[k][col].doubleValue();
+            sum += matrixA[row][k] * matrixB[k][col];
         }
-        return (T) Double.valueOf(sum);
+        return sum;
     }
 }
