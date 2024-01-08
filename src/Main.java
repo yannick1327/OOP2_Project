@@ -5,7 +5,6 @@ import MatrixOperations.MatrixProduct;
 import MatrixOperations.ScalarMultiplication;
 import VectorOperations.ScalarProduct;
 import VectorOperations.VectorAdditionAndSubtraction;
-import VectorOperations.VectorProduct;
 import VectorOperations.VectorScalarMultiplication;
 
 import java.io.BufferedWriter;
@@ -26,19 +25,13 @@ public class Main {
          * folgender Code ist nur zu Demonstrationszwecken erstellt worden und ist nicht Teil
          * des Hauptprogramms
          */
-        double[][] matrixA = generateRandomMatrix(1500, 1500);
-        double[][] matrixB = generateRandomMatrix(1500, 1500);
-
-        // multiplyMatrices(matrixA, matrixB);
-
-        int maxAvailableThreads = Runtime.getRuntime().availableProcessors();
-        multiplyMatricesWithThreads(matrixA, matrixB, maxAvailableThreads);
-
-        PrintMethods printMethods = new PrintMethods();
-        CSVReader csvReader = new CSVReader();
-
-        printMethods.printResult(csvReader.readMatrixFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv"));
-        printMethods.printResult(csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv"));
+//        double[][] matrixA = generateRandomMatrix(1500, 1500);
+//        double[][] matrixB = generateRandomMatrix(1500, 1500);
+//
+//        // multiplyMatrices(matrixA, matrixB);
+//
+//        int maxAvailableThreads = Runtime.getRuntime().availableProcessors();
+//        //multiplyMatricesWithThreads(matrixA, matrixB, maxAvailableThreads);
 
         boolean validInput = false;
 
@@ -52,9 +45,9 @@ public class Main {
             if (input.equalsIgnoreCase("M"))
             {
                 scanner.reset();
+                validInput = true;
                 TasktypeMatrixoperations selectedTask = SelectMatrixoperation();
                 if (selectedTask != TasktypeMatrixoperations.Invalid){
-                    validInput = true;
                     RunSelectedTask(selectedTask);
                     break;
                 }
@@ -62,9 +55,9 @@ public class Main {
             } else if (input.equalsIgnoreCase("V"))
             {
                 scanner.reset();
+                validInput = true;
                 TasktypeVectoroperations selectedTask = SelectVectoroperation();
                 if (selectedTask != TasktypeVectoroperations.Invalid){
-                    validInput = true;
                     RunSelectedTask(selectedTask);
                     break;
                 }
@@ -72,7 +65,7 @@ public class Main {
             {
                 System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
             }
-            scanner.close();
+            scanner.reset();
         }
     }
 
@@ -126,9 +119,8 @@ public class Main {
         switch (Integer.parseInt(input)) {
             case (1) -> returnValue = TasktypeVectoroperations.VectorAddidtion;
             case (2) -> returnValue = TasktypeVectoroperations.VectorSubstraction;
-            case (3) -> returnValue = TasktypeVectoroperations.VectorProduct;
-            case (4) -> returnValue = TasktypeVectoroperations.ScalarMultiplication;
-            case (5) -> returnValue = TasktypeVectoroperations.ScalarProduct;
+            case (3) -> returnValue = TasktypeVectoroperations.ScalarMultiplication;
+            case (4) -> returnValue = TasktypeVectoroperations.ScalarProduct;
             default -> {
                 System.out.println("fehlerhafte Eingabe... Versuchen Sie es erneut.");
                 returnValue = TasktypeVectoroperations.Invalid;
@@ -176,21 +168,6 @@ public class Main {
 
             calculationClass = new VectorAdditionAndSubtraction(firstInput,secondInput,false);
             VectorAdditionAndSubtraction castedClass = ((VectorAdditionAndSubtraction) calculationClass);
-            castedClass.performOperation();
-            result = castedClass.returnResult();
-
-        } else if (selectedTask == TasktypeVectoroperations.VectorProduct) {
-            System.out.println("Bitte geben die in die \"FirstInput.csv\" einen Vektor ein.");
-            System.out.println("Bitte geben die in die \"SecondInput.csv\" einen zweiten Vektor, mit dem das Kreuzprodukt gebildet werden soll.");
-            System.out.println("Bestätigen sie ihre Eingaben indem sie \"C\" eingeben.");
-
-            String input = scanner.nextLine();
-            if (!input.equalsIgnoreCase("C")) return;
-            double[] firstInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/FirstInput.csv");
-            double[] secondInput = csvReader.readVectorFromCSV(System.getProperty("user.dir") + "/src/CSV-Files/SecondInput.csv");
-
-            calculationClass = new VectorProduct(firstInput,secondInput);
-            VectorProduct castedClass = ((VectorProduct) calculationClass);
             castedClass.performOperation();
             result = castedClass.returnResult();
 
