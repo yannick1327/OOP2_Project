@@ -6,10 +6,23 @@ import java.util.concurrent.TimeUnit;
 
 public class ScalarProduct extends VectorOperation {
 
+    /**
+     * Konstruktor der zwei Vektoren annimmt und
+     * diese an den Konstruktor der Oberklasse weitergegeben
+     * @param vectorA der erste Vektor der Rechenoperation
+     * @param vectorB der zweite Vektor der Rechenoperation
+     * @author Yannick Diehl
+     */
     public ScalarProduct(double[] vectorA, double[] vectorB) {
         super(vectorA, vectorB);
     }
 
+    /**
+     * Diese Methode führt die Rechenoperation aus mit den Werten die in
+     * den Eigenschaften der Basisklasse gespeichert sind aus. Sie überschreibt
+     * die eine leere Methode der Basisklasse.
+     * @author Yannick Diehl
+     */
     @Override
     public void performOperation() {
         ExecutorService executor = Executors.newFixedThreadPool(vectorA.length * vectorB.length);
@@ -33,6 +46,9 @@ public class ScalarProduct extends VectorOperation {
         result = new double[]{i};
     }
 
+    /**
+     * @authors Yannick Diehl
+     */
     private double scalarProductAtIndex(int index) {
         return vectorA[index] * vectorB[index];
     }
