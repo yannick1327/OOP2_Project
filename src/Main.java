@@ -19,6 +19,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
+    /**
+     * @author Yannick Diehl
+     */
     public static void main(String[] args) {
 
         /**
@@ -69,6 +72,11 @@ public class Main {
         }
     }
 
+    /**
+     * Dient dazu dem Nutzer über die Konsole die Auswahl der möglichen Rechenoperationen auszugeben
+     * Die Überladung dient hier dazu zwischen den TaskTypes von Matrix und Vektor zu unterscheiden
+     * @author Yannick Diehl
+     */
     private static TasktypeMatrixoperations SelectMatrixoperation()
     {
         System.out.println("Geben die die Zahl der Operation ein die sie ausführen möchten.");
@@ -100,6 +108,11 @@ public class Main {
         return returnValue;
     }
 
+    /**
+     * Dient dazu dem Nutzer über die Konsole die Auswahl der möglichen Rechenoperationen auszugeben
+     * Die Überladung dient hier dazu zwischen den TaskTypes von Matrix und Vektor zu unterscheiden
+     * @author Yannick Diehl
+     */
     private static TasktypeVectoroperations SelectVectoroperation()
     {
         System.out.println("Geben die die Zahl der Operation ein die sie ausführen möchten.");
@@ -130,6 +143,13 @@ public class Main {
         return returnValue;
     }
 
+    /**
+     * Wählt zwischen den Rechenoperationen aus, anhand des übergeben Parameters,
+     * der einen Wert eines TaskTypes darstellt, und erstellt eine Instanz der Rechenklasse um die Rechnung durchzuführen
+     * Die Überladung dient hier dazu zwischen den TaskTypes von Matrix und Vektor zu unterscheiden
+     * @param selectedTask der ausgewählte TaskType
+     * @author Yannick Diehl
+     */
     private static void RunSelectedTask(TasktypeVectoroperations selectedTask)
     {
         if (selectedTask == TasktypeVectoroperations.Invalid) {
@@ -220,6 +240,13 @@ public class Main {
         scanner.reset();
     }
 
+    /**
+     * Wählt zwischen den Rechenoperationen aus, anhand des übergeben Parameters,
+     * der einen Wert eines TaskTypes darstellt, und erstellt eine Instanz der Rechenklasse um die Rechnung durchzuführen
+     * Die Überladung dient hier dazu zwischen den TaskTypes von Matrix und Vektor zu unterscheiden
+     * @param selectedTask der ausgewählte TaskType
+     * @author Yannick Diehl
+     */
     private static void RunSelectedTask(TasktypeMatrixoperations selectedTask)
     {
         if (selectedTask == TasktypeMatrixoperations.Invalid) {
@@ -332,6 +359,12 @@ public class Main {
         scanner.reset();
     }
 
+    /**
+     * Schreibt das Ergebnis, das in Form eines Vektors angenommen wird in die Datei, die übergeben werden.
+     * @param result das Ergebnis in Form eines Vektors
+     * @param fileName der Pfad mit voll qualifiziertem Namen der Datei
+     * @author Leon Rausch
+     */
     public static void writeResultToFile(double[] result, String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (double value : result) {
@@ -350,6 +383,12 @@ public class Main {
         }
     }
 
+    /**
+     * Schreibt das Ergebnis, das in Form einer Matrix angenommen wird in die Datei, die übergeben werden.
+     * @param matrix das Ergebnis in Form einer Matrix
+     * @param fileName der Pfad mit voll qualifiziertem Namen der Datei
+     * @author Leon Rausch
+     */
     public static void writeMatrixToFile(double[][] matrix, String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (double[] row : matrix) {
@@ -375,6 +414,7 @@ public class Main {
      * Methode führt eine Matrixmultiplikation OHNE Multithreading aus.
      * Wird nur für den Unterschied der Ausführungsgeschwindigkeit genutzt.
      * WICHTIG: nicht für die Nutzung im Hauptprogramm bestimmt!
+     * @author Leon Rausch
      */
     public static void multiplyMatrices(double[][] matrixA, double[][] matrixB) {
         int rowsA = matrixA.length;
@@ -399,6 +439,7 @@ public class Main {
      * Methode führt eine Matrixmultiplikation MIT Multithreading aus.
      * Wird nur für den Unterschied der Ausführungsgeschwindigkeit genutzt.
      * WICHTIG: nicht für die Nutzung im Hauptprogramm bestimmt!
+     * @author Leon Rausch
      */
     public static void multiplyMatricesWithThreads(double[][] matrixA, double[][] matrixB, int numThreads) {
         int rowsA = matrixA.length;
@@ -431,6 +472,9 @@ public class Main {
         printMethods.printResult(result);
     }
 
+    /**
+     * @author Leon Rausch
+     */
     public static double[][] generateRandomMatrix(int rows, int cols) {
         Random random = new Random();
         double[][] matrix = new double[rows][cols];

@@ -1,4 +1,8 @@
 package Enums;
+
+/**
+ * @author Yannick Diehl
+ */
 public enum TasktypeMatrixoperations
 {
     MatrixAddition, // addition von zwei Matrizen

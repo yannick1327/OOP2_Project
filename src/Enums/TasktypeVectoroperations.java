@@ -1,4 +1,7 @@
 package Enums;
+/**
+ * @author Yannick Diehl
+ */
 public enum TasktypeVectoroperations
 {
     VectorAddidtion, // addition von zwei Vektoren
