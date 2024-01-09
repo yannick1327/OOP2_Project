@@ -453,6 +453,7 @@ public class Main {
      * an Reihen und Zeilen mit zufälligen Werten
      * @param rows Wie viele Reihen die Matrix haben soll
      * @param cols Wie viele Zeilen die Matrix haben soll
+     * @author Leon Rausch
      */
     public static double[][] generateRandomMatrix(int rows, int cols) {
         Random random = new Random();

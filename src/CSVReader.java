@@ -13,6 +13,7 @@ public class CSVReader {
      * und die einzelnen Reihen durch einen Zeilenumbruch getrennt sind!
      * @param fileName
      * @return double[][] matrix - vollständige Matrix als zweidimensionales Double Array
+     * @author Yannick Diehl
      */
     public double[][] readMatrixFromCSV(String fileName) {
         List<String> lines = readLinesFromCSV(fileName);
@@ -26,6 +27,7 @@ public class CSVReader {
      * Kommas von getrennt werden!
      * @param fileName Der Pfad und Dateiname der CSV-Datei
      * @return double[] vector - vollständiger Vektor als Double Array
+     * @author Yannick Diehl
      */
     public double[] readVectorFromCSV(String fileName) {
         List<String> lines = readLinesFromCSV(fileName);
@@ -37,6 +39,7 @@ public class CSVReader {
      * als Liste von Strings zurück.
      * @param fileName Der Pfad und Dateiname der Datei
      * @return List<String> lines - Liste von Strings
+     * @author Yannick Diehl
      */
     private List<String> readLinesFromCSV(String fileName) {
         List<String> lines = new ArrayList<>();
@@ -60,6 +63,7 @@ public class CSVReader {
      * sie in der richtigen Reihenfolge als Matrix in ein zweidimensionales Double Array.
      * @param lines Liste von Strings mit ihren Elementen
      * @return double[][] matrix - vollständige Matrix als zweidimensionales Double Array
+     * @author Leon Rausch
      */
     private double[][] parseMatrix(List<String> lines) {
         int numRows = lines.size();
@@ -83,6 +87,7 @@ public class CSVReader {
      * sie in der richtigen Reihenfolge als Vektor in ein Double Array.
      * @param lines Liste von Strings mit ihren Elementen
      * @return double[] vector - vollständiger Vektor als Double Array
+     * @author Leon Rausch
      */
     private double[] parseVector(List<String> lines) {
         String[] values = lines.get(0).split(",");
