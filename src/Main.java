@@ -19,12 +19,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-    /**
-     * @author Yannick Diehl
-     */
     public static void main(String[] args) {
 
-        /**
+        /*
          * folgender Code ist nur zu Demonstrationszwecken erstellt worden und ist nicht Teil
          * des Hauptprogramms
          */
