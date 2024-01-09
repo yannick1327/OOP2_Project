@@ -4,6 +4,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Die Klasse {@code MatrixProduct} führt das Matrixprodukt zweier Matrizen aus.
+ * Sie erbt von der abstrakten Klasse {@code MatrixOperation}.
+ * @author Leon Rausch
+ */
 public class MatrixProduct extends MatrixOperation {
 
     public MatrixProduct(double[][] matrixA, double[][] matrixB) {

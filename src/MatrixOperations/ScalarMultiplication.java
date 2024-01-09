@@ -4,6 +4,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Die Klasse {@code ScalarMultiplication} führt die Skalarmultiplikation einer Matrix mit einem Skalar aus.
+ * Sie erbt von der abstrakten Klasse {@code MatrixOperation}.
+ * @author Leon Rausch
+ */
 public class ScalarMultiplication extends MatrixOperation {
 
     public ScalarMultiplication(double[][] matrix, double scalar) {

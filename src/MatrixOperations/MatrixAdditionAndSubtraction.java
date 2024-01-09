@@ -4,7 +4,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class MatrixAdditionAndSubtraction extends MatrixOperation {
+/**
+ * Die Klasse {@code MatrixAdditionAndSubtraction} führt je nach Eingaben des Nutzers
+ * die Addition oder Subtraktion zweier Matrizen aus.
+ * Sie erbt von der abstrakten Klasse {@code MatrixOperation}.
+ * @author Leon Rausch
+ */
+ public class MatrixAdditionAndSubtraction extends MatrixOperation {
 
     private boolean isAddition;
 
